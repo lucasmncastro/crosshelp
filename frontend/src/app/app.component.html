@@ -37,14 +37,10 @@
         <li class="nav-item p-2 mb-3">
           <input class="form-control" placeholder="Search..."/>
         </li>
-        <li class="nav-item">
-          <a class="nav-link active" href="#">All tickets<span class="sr-only">(current)</span></a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Open</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Closed</a>
+        <li class="nav-item" *ngFor="let s of statusesList">
+          <a class="nav-link" [class.active]="currentStatus.value === s.value" href="#" (click)="onSelect(s.value)">
+            {{ s.name }}
+          </a>
         </li>
         <li class="nav-item p-2">
           <a href="" class="btn btn-primary btn-block">New Ticket</a>
@@ -53,7 +49,7 @@
     </nav>
 
     <main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
-      <h1>All tickets</h1>
+      <h1> {{ currentStatus.name }} </h1>
 
       <div class="table-responsive">
         <table class="table table-striped table-bordered">
@@ -63,7 +59,7 @@
               <th>Title</th>
               <th>Costumer</th>
               <th>Author</th>
-              <th>Date</th>
+              <th>Created at</th>
             </tr>
           </thead>
           <tbody>

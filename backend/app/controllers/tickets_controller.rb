@@ -1,9 +1,11 @@
 class TicketsController < ApplicationController
   before_action :set_ticket, only: [:show, :update, :destroy]
 
+  has_scope :with_status
+
   # GET /tickets
   def index
-    @tickets = Ticket.all
+    @tickets = apply_scopes(Ticket.all)
 
     render json: @tickets
   end
