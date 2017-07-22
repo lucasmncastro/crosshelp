@@ -1,7 +1,10 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  name: MyString
+likke:
+  name: Likke
 
-two:
-  name: MyString
+aurea:
+  name: Aurea
+
+mobi:
+  name: Mobi

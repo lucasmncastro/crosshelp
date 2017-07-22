@@ -1,13 +1,7 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  title: MyString
-  message: MyText
-  status: MyString
-  user: one
-
-two:
-  title: MyString
-  message: MyText
-  status: MyString
-  user: two
+  title: Fix my website
+  message: Please, I can't access it!
+  status: open
+  user: andrey
