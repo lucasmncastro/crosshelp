@@ -1,0 +1,46 @@
+<div class="row">
+  <nav class="col-sm-3 col-md-2 hidden-xs-down bg-faded sidebar">
+    <ul class="nav nav-pills flex-column">
+      <li class="nav-item p-2 mb-3">
+        <input class="form-control" placeholder="Search..."/>
+      </li>
+      <li class="nav-item" *ngFor="let s of statusList">
+        <a class="nav-link" [class.active]="selectedStatus.value === s.value" href="#" (click)="selectStatusFilter(s.value)">
+          {{ s.name }}
+        </a>
+      </li>
+      <li class="nav-item p-2">
+        <a href="" class="btn btn-primary btn-block">New Ticket</a>
+      </li>
+    </ul>
+  </nav>
+
+  <main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
+    <h1> {{ title }} </h1>
+
+    <div class="table-responsive">
+      <table class="table table-bordered tickets">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Title</th>
+            <th>Costumer</th>
+            <th>Author</th>
+            <th>Opened on</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let ticket of list" (click)="selectItem(ticket)">
+            <td>{{ ticket.id }} </td>
+            <td>{{ ticket.title }}</td>
+            <td>{{ ticket.customer }}</td>
+            <td>{{ ticket.author }}</td>
+            <td>{{ ticket.opened_at | amTimeAgo }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <ticket-detail [item]="selectedItem"></ticket-detail>
+  </main>
+</div>

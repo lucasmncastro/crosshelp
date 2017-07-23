@@ -1,15 +1,15 @@
-<div *ngIf="ticket" class="ticket">
-  <h1>{{ ticket.title }} <small>#{{ ticket.id }}</small></h1>
+<div *ngIf="item" class="ticket">
+  <h1>{{ item.title }} <small>#{{ item.id }}</small></h1>
   <div class="summary">
-    <span class="badge badge-{{ ticket.status == 'closed' ? 'danger' : 'success' }}">
-      {{ ticket.status | titlecase }}
+    <span class="badge badge-{{ item.status == 'closed' ? 'danger' : 'success' }}">
+      {{ item.status | titlecase }}
     </span>
-    {{ ticket.author }} from {{ ticket.customer }} 
+    {{ item.author }} from {{ item.customer }} 
     opened this
-    {{ ticket.opened_at | amTimeAgo }} 
+    {{ item.opened_at | amTimeAgo }} 
     - 0 comments
   </div>
   <div class="text">
-    {{ ticket.message }}
+    {{ item.message }}
   </div>
 </div>

@@ -6,11 +6,13 @@ import { MomentModule } from 'angular2-moment';
 
 import { AppComponent } from './app.component';
 
+import { TicketListComponent } from './ticket-list.component';
 import { TicketDetailComponent } from './ticket-detail.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    TicketListComponent,
     TicketDetailComponent
   ],
   imports: [
