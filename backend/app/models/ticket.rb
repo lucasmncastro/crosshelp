@@ -7,6 +7,8 @@ class Ticket < ApplicationRecord
     {
       id: id,
       title: title,
+      message: message,
+      status: status,
       customer: user.customer.name,
       opened_at: created_at,
       author: user.name
