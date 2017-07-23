@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Ticket } from './ticket';
+import { TicketService } from './ticket.service';
 
 
 @Component({
@@ -10,5 +11,24 @@ import { Ticket } from './ticket';
 export class TicketDetailComponent {
 
   @Input() item: Ticket;
+  editMode = false;
 
+  constructor(private service: TicketService) { }
+
+  edit() {
+    this.editMode = true;
+  }
+
+  save() {
+    this.service.
+      save(this.item).
+      then(
+        data => {
+          this.editMode = false;
+        },
+        err => {
+          this.editMode = true;
+        }
+    );
+  }
 }

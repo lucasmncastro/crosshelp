@@ -12,10 +12,8 @@ export class TicketFormComponent {
   @Input() item: Ticket;
   message: any;
 
-
   constructor(private service: TicketService) { }
   
-
   save() {
     this.service.
       create(this.item).
