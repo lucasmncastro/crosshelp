@@ -1,0 +1,24 @@
+<div *ngIf="item">
+  <h1>New Ticket</h1>
+
+  <ngb-alert *ngIf="message" [dismissible]="false" [type]="message.type">{{ message.message }}</ngb-alert>
+
+  <form>
+    <div class="form-group">
+      <label for="name">User ID</label>
+      <input [(ngModel)]="item.user_id" name="id" placeholder="User id" class="form-control"/>
+    </div>
+    
+    <div class="form-group">
+      <label for="name">Title</label>
+      <input [(ngModel)]="item.title" name="title" placeholder="Describe your issue" class="form-control"/>
+    </div>
+
+    <div class="form-group">
+      <label for="name">Details</label>
+      <textarea [(ngModel)]="item.message" name="message" class="form-control" rows="10"></textarea>
+    </div>
+
+    <button type="submit" class="btn btn-success" (click)="save()">Submit</button>
+  </form>
+</div>

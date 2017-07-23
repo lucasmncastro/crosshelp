@@ -1,6 +1,9 @@
 export class Ticket {
-  id: number;
-  title: string;
-  user: string;
+  constuctor(
+    id: number,
+    title: string,
+    message: string,
+    user_id: number
+  ) {}
 }
 

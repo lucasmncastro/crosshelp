@@ -48,6 +48,6 @@ class TicketsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def ticket_params
-      params.fetch(:ticket, {}).permit(:title, :user_id)
+      params.fetch(:ticket, {}).permit(:title, :message, :user_id)
     end
 end

@@ -3,15 +3,21 @@ class Ticket < ApplicationRecord
 
   scope :with_status, -> (status) { where(status: status) }
 
+  before_create :set_status_open
+
   def as_json(options={})
     {
       id: id,
       title: title,
       message: message,
       status: status,
-      customer: user.customer.name,
+      customer: user.customer.try(:name),
       opened_at: created_at,
       author: user.name
     }
+  end
+
+  def set_status_open
+    self.status = "open"
   end
 end

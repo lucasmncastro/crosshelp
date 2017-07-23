@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { Ticket } from './ticket';
+import { TicketService } from './ticket.service';
+import { TicketFormComponent } from './ticket-form.component';
 
 
 @Component({
@@ -11,7 +12,8 @@ import { Ticket } from './ticket';
 export class TicketListComponent implements OnInit {
 
   title:        string;
-  list:         Ticket[];
+  list:         any;
+  item:         Ticket;
   selectedItem: Ticket;
 
   // List of ticket status used on side menu to filter them.
@@ -23,9 +25,7 @@ export class TicketListComponent implements OnInit {
   selectedStatus: any;
 
 
-  constructor(private http: HttpClient) {
-    this.selectedItem = null;
-  }
+  constructor(private service: TicketService) { }
 
 
   ngOnInit(): void {
@@ -37,15 +37,22 @@ export class TicketListComponent implements OnInit {
     this.title = this.selectedStatus.name;
     this.getList(status);
     this.selectedItem = null;
+    this.item = null;
   }
 
   getList(status) {
-    this.http.get<Ticket[]>(`http://localhost:3000/tickets?with_status=${status}`).subscribe(data => {
-      this.list = data;
-    });
+    this.service.getList(status).then(data => this.list = data);
+  }
+
+  newItem() {
+    this.selectedItem = null;
+    this.list = null;
+    this.item = new Ticket();
   }
 
   selectItem(item) {
+    this.list = null;
+    this.item = null;
     this.selectedItem = item;
   } 
 }

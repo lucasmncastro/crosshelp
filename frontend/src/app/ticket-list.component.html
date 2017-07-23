@@ -10,37 +10,40 @@
         </a>
       </li>
       <li class="nav-item p-2">
-        <a href="" class="btn btn-primary btn-block">New Ticket</a>
+        <a href="#" (click)="newItem()" class="btn btn-primary btn-block">New Ticket</a>
       </li>
     </ul>
   </nav>
 
   <main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
-    <h1> {{ title }} </h1>
+    <div *ngIf="list">
+      <h1> {{ title }} </h1>
 
-    <div class="table-responsive">
-      <table class="table table-bordered tickets">
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Title</th>
-            <th>Costumer</th>
-            <th>Author</th>
-            <th>Opened on</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let ticket of list" (click)="selectItem(ticket)">
-            <td>{{ ticket.id }} </td>
-            <td>{{ ticket.title }}</td>
-            <td>{{ ticket.customer }}</td>
-            <td>{{ ticket.author }}</td>
-            <td>{{ ticket.opened_at | amTimeAgo }}</td>
-          </tr>
-        </tbody>
-      </table>
+      <div class="table-responsive">
+        <table class="table table-bordered tickets">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Title</th>
+              <th>Costumer</th>
+              <th>Author</th>
+              <th>Opened on</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let ticket of list" (click)="selectItem(ticket)">
+              <td>{{ ticket.id }} </td>
+              <td>{{ ticket.title }}</td>
+              <td>{{ ticket.customer }}</td>
+              <td>{{ ticket.author }}</td>
+              <td>{{ ticket.opened_at | amTimeAgo }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
 
     <ticket-detail [item]="selectedItem"></ticket-detail>
+    <ticket-form [item]="item"></ticket-form>
   </main>
 </div>
