@@ -34,4 +34,12 @@ export class TicketService {
     });
   }
 
+
+  delete(ticket) {
+    return new Promise((resolve, reject) => {
+      this.http.delete(`http://localhost:3000/tickets/${ticket.id}`)
+        .subscribe(data => resolve(data), err => reject(err));
+    });
+  }
+
 }

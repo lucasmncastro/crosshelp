@@ -23,12 +23,17 @@ export class TicketDetailComponent {
     this.service.
       save(this.item).
       then(
-        data => {
-          this.editMode = false;
-        },
-        err => {
-          this.editMode = true;
-        }
-    );
+        data => this.editMode = false,
+        err  => this.editMode = true
+      );
+  }
+
+  delete() {
+    this.service.
+      delete(this.item).
+      then(
+        data => console.info("Deleted!"),
+        err  => console.info("Error, maybe it already was deleted!")
+      );
   }
 }
