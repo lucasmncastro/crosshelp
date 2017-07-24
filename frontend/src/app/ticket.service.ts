@@ -37,6 +37,16 @@ export class TicketService {
     });
   }
 
+  saveComment(ticket, message, action) {
+    return new Promise((resolve, reject) => {
+      console.info("Message: " + message);
+      var params = {comment: { message: message, action: action } };
+      this.http.post(`${URL_BASE}/${ticket.id}/comments`, params, this.options())
+        .subscribe(data => resolve(data), err => reject(err));
+    });
+  }
+
+
   delete(ticket) {
     return new Promise((resolve, reject) => {
       this.http.delete(`${URL_BASE}/${ticket.id}`, this.options())

@@ -4,8 +4,9 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       resources :sessions, only: [:create, :destroy]
-      resources :comments
-      resources :tickets
+      resources :tickets do
+        resources :comments
+      end
       resources :users
       resources :customers
     end

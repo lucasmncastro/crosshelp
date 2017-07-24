@@ -16,7 +16,7 @@
   </nav>
 
   <main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
-    <div class="ticket">
+    <div class="ticket" *ngIf="item">
       <h1>
         <span *ngIf="!editMode">
           {{ item.title }}
@@ -35,7 +35,7 @@
         {{ item.author }} from {{ item.customer }} 
         opened this
         {{ item.opened_at | amTimeAgo }} 
-        - 0 comments
+        - {{ item.comments.length }} comments
       </div>
 
       <div *ngIf="!editMode" class="text">
@@ -54,6 +54,34 @@
         <button *ngIf="!editMode" (click)="edit()" class="btn btn-secondary">Edit</button>
         <button *ngIf="!editMode" (click)="delete()" class="ml-auto btn btn-outline-danger">Delete</button>
       </div>
+
+      <hr />
+
+      <h4 class="m-b-2">Comments <span *ngIf="item.comments.length != 0">({{item.comments.length }})</span></h4>
+
+      <div *ngIf="item.comments.length == 0">
+        <em>No comments so far.</em>
+      </div>
+
+      <div class="comment p-2 mt-2" *ngFor="let comment of item.comments">
+        <div class="message">{{ comment.message }} </div>
+        <div class="info">
+          <span class="author">{{ comment.author }} </span>
+          <span class="created-at">{{ comment.created_at | amTimeAgo }}</span>
+        </div>
+      </div>
+
+      <form>
+        <div class="card mt-3 mb-3">
+          <div class="card-block p-1">
+            <textarea [(ngModel)]="comment" name="comment" placeholder="Leave a comment" rows="5" class="form-control"></textarea>
+          </div>
+          <div class="card-footer p-1">
+            <button (click)="saveComment()" class="btn btn-primary">Comment</button>
+            <button (click)="saveComment('close')" class="btn btn-secondary">Close Ticket</button>
+          </div>
+        </div>
+      </form>
 
     </div>
   </main>

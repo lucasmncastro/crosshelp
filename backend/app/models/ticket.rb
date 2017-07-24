@@ -5,6 +5,8 @@ class Ticket < ApplicationRecord
 
   before_create :set_status_open
 
+  has_many :comments, dependent: :delete_all
+
   def as_json(options={})
     {
       id: id,
@@ -13,7 +15,8 @@ class Ticket < ApplicationRecord
       status: status,
       customer: user.customer.try(:name),
       opened_at: created_at,
-      author: user.name
+      author: user.name,
+      comments: comments
     }
   end
 

@@ -16,3 +16,11 @@
 .ticket h1 .form-control {
   font-size: 1em;
 }
+.ticket .comment {
+  background: #f7f7f9;
+}
+.ticket .comment .info {
+  color: #adadad;
+  text-align: right;
+  font-style: italic;
+}

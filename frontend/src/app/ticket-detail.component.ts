@@ -22,6 +22,7 @@ export class TicketDetailComponent implements OnInit {
   selectedStatus: any;
 
   item: any;
+  comment: any;
   editMode = false;
 
   constructor(
@@ -43,9 +44,24 @@ export class TicketDetailComponent implements OnInit {
       );
   }
 
-  ngOnInit(): void {
-    this.item = new Ticket();
+  saveComment(action='') {
+    this.service
+      .saveComment(this.item, this.comment, action)
+      .then(
+        data => {
+          this.comment = null;
+          this.loadItem()
+        },
+        err  => console.error("Error saving comment"),
+      );
+  }
 
+  ngOnInit(): void {
+    this.item = null;
+    this.loadItem();
+  }
+
+  loadItem() {
     this.route.paramMap
       .switchMap((params: ParamMap) => {
         var id = +params.get('id');
