@@ -1,12 +1,27 @@
 class ApplicationController < ActionController::API
   include ActionController::HttpAuthentication::Token::ControllerMethods
 
-  before_action :authenticate!
+  # Add a before_action to authenticate all requests. 
+  #
+  # Move this to subclassed controllers if you only want to authenticate
+  # certain methods.
+  before_action :authenticate
 
-  def authenticate!
+  protected
+
+  # Authenticate the user with token based authentication
+  def authenticate
+    authenticate_token || render_unauthorized
+  end
+
+  def authenticate_token
     authenticate_with_http_token do |token, options|
-      @user = User.where(auth_token: token).first
+      @current_user = User.find_by(auth_token: token)
     end
   end
 
+  def render_unauthorized(realm = "Application")
+    self.headers["WWW-Authenticate"] = %(Token realm="#{realm.gsub(/"/, "")}")
+    render json: 'Bad credentials', status: :unauthorized
+  end
 end

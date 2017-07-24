@@ -1,4 +1,6 @@
 class Api::V1::SessionsController < ApplicationController
+  skip_before_action :authenticate
+
   def create
     user = User.where("lower(trim(email)) = ?",  params[:email].downcase.strip).first
 
