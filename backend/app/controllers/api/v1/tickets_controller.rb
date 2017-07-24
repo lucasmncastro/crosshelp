@@ -5,7 +5,11 @@ class Api::V1::TicketsController < ApplicationController
 
   # GET /tickets
   def index
-    @tickets = apply_scopes(Ticket.all)
+    if @current_user.role.customer?
+      @tickets = apply_scopes(@current_user.tickets)
+    else
+      @tickets = apply_scopes(Ticket.all)
+    end
 
     render json: @tickets
   end
@@ -43,7 +47,11 @@ class Api::V1::TicketsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_ticket
-      @ticket = Ticket.find(params[:id])
+      if @current_user.role.customer?
+        @ticket = @current_user.tickets.find(params[:id])
+      else
+        @ticket = Ticket.find(params[:id])
+      end
     end
 
     # Only allow a trusted parameter "white list" through.

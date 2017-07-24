@@ -1,4 +1,14 @@
 class User < ApplicationRecord
+  extend Enumerize
+
+  # Role represents the kind of users:
+  #
+  # - Admin: can manage all the resource
+  # - Customer: can access only his/her tickets
+  # - Agent: can answer all the tickets
+  enumerize :role, in: %w(admin customer agent), default: :customer
+
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
