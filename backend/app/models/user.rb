@@ -9,4 +9,14 @@ class User < ApplicationRecord
 
   # The tickets that user opened.
   has_many :tickets
+
+
+  # Generate a new auth_token and save it.
+  # It is necessary on front-end authentications.
+  def create_auth_token!
+    self.auth_token = SecureRandom.base64(50)
+    self.save!
+    self.auth_token
+  end
+
 end

@@ -1,5 +1,11 @@
 Rails.application.routes.draw do
-  devise_for :users
+  devise_for :user
+
+  namespace :api do
+    namespace :v1 do
+      resources :sessions, only: [:create, :destroy]
+    end
+  end
   resources :comments
   resources :tickets
   resources :users

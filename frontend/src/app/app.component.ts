@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { TicketListComponent } from './ticket-list.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -10,7 +10,17 @@ import { TicketListComponent } from './ticket-list.component';
 export class AppComponent {
   title = 'CrossHelp';
 
+  constructor(router: Router) {
+    if (! this.userSignedIn()) {
+      router.navigate(['/login']);
+    }
+  }
+
   userSignedIn() {
     return window.localStorage['authToken'] != '';
+  }
+
+  getUsername() {
+    return window.localStorage['name'];
   }
 }

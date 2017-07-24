@@ -8,6 +8,7 @@
         Login
       </div>
       <div class="card-block">
+        <div *ngIf="message" class="message text-danger mb-2">{{ message }}</div>
         <form>
           <div class="form-group">
             <input [(ngModel)]="email" name="email" type="email" class="form-control" id="email" placeholder="Enter email">

@@ -14,6 +14,7 @@ import { TicketDetailComponent } from './ticket-detail.component';
 import { TicketFormComponent } from './ticket-form.component';
 import { HelpComponent } from './help.component';
 import { LoginComponent } from './login/login.component';
+import { AuthService } from './auth.service';
 
 
 @NgModule({
@@ -42,7 +43,8 @@ import { LoginComponent } from './login/login.component';
     ])
   ],
   providers: [
-    TicketService
+    TicketService,
+    AuthService
   ],
   bootstrap: [AppComponent]
 })

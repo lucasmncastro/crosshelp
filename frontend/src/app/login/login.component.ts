@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-login',
@@ -10,8 +11,10 @@ export class LoginComponent implements OnInit {
 
   email: string;
   password: string;
+  message :string;
 
   constructor(
+    private service: AuthService,
     private router: Router
   ) { }
 
@@ -20,9 +23,20 @@ export class LoginComponent implements OnInit {
   }
 
   doLogin() {
-    window.localStorage['authToken'] = 'false-token';
+    this.service.login(this.email, this.password)
+    .then(
+      data => {
+        window.localStorage['authToken'] = data['token'];
+        window.localStorage['email'] = data['email'];
+        window.localStorage['name'] = data['name'];
+        this.router.navigate(['/']);
+      },
+      err => {
+        this.password = "";
+        this.message = "Email or password invalid"
+      }
+    );
 
-    this.router.navigate(['/']);
   }
 
 }
