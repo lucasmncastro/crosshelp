@@ -3,42 +3,43 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Ticket } from './ticket';
 
 
+const URL_BASE: string = 'http://localhost:3000/api/v1/tickets';
+
 @Injectable()
 export class TicketService {
-
   constructor(private http: HttpClient) {}
 
   getList(status) {
     return new Promise((resolve, reject) => { 
-      this.http.get(`http://localhost:3000/tickets?with_status=${status}`, this.options())
+      this.http.get(`${URL_BASE}?with_status=${status}`, this.options())
         .subscribe(data => resolve(data), err => reject(err));
     })
   }
 
   getItem(id) {
     return new Promise((resolve, reject) => { 
-      this.http.get(`http://localhost:3000/tickets/${id}`, this.options())
+      this.http.get(`${URL_BASE}/${id}`, this.options())
         .subscribe(data => resolve(data), err => reject(err));
     })
   }
 
   create(ticket) {
     return new Promise((resolve, reject) => {
-      this.http.post('http://localhost:3000/tickets', {'ticket': ticket}, this.options())
+      this.http.post(URL_BASE, {'ticket': ticket}, this.options())
         .subscribe(data => resolve(data), err => reject(err));
     });
   }
 
   save(ticket) {
     return new Promise((resolve, reject) => {
-      this.http.put(`http://localhost:3000/tickets/${ticket.id}`, {'ticket': ticket}, this.options())
+      this.http.put(`${URL_BASE}/${ticket.id}`, {'ticket': ticket}, this.options())
         .subscribe(data => resolve(data), err => reject(err));
     });
   }
 
   delete(ticket) {
     return new Promise((resolve, reject) => {
-      this.http.delete(`http://localhost:3000/tickets/${ticket.id}`, this.options())
+      this.http.delete(`${URL_BASE}/${ticket.id}`, this.options())
         .subscribe(data => resolve(data), err => reject(err));
     });
   }
