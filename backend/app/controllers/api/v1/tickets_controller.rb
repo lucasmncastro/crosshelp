@@ -24,7 +24,7 @@ class Api::V1::TicketsController < ApplicationController
     @ticket = Ticket.new(ticket_params)
 
     if @ticket.save
-      render json: @ticket, status: :created, location: @ticket
+      render json: @ticket, status: :created, location: ['api', 'v1', @ticket]
     else
       render json: @ticket.errors, status: :unprocessable_entity
     end
