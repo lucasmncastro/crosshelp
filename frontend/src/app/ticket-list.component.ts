@@ -1,7 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, ParamMap } from '@angular/router';
+import { Location } from '@angular/common';
+
 import { Ticket } from './ticket';
 import { TicketService } from './ticket.service';
 import { TicketFormComponent } from './ticket-form.component';
+
+import 'rxjs/add/operator/switchMap';
 
 
 @Component({
@@ -13,8 +18,6 @@ export class TicketListComponent implements OnInit {
 
   title:        string;
   list:         any;
-  item:         Ticket;
-  selectedItem: Ticket;
 
   // List of ticket status used on side menu to filter them.
   statusList = [
@@ -25,34 +28,27 @@ export class TicketListComponent implements OnInit {
   selectedStatus: any;
 
 
-  constructor(private service: TicketService) { }
+  constructor(
+    private service: TicketService,
+    private route: ActivatedRoute,
+    private location: Location
+  ) { }
 
 
   ngOnInit(): void {
-    this.selectStatusFilter();
-  }
+    this.route.paramMap
+      .switchMap((params: ParamMap) => {
+        var status:string = params.get('status') || '';
 
-  selectStatusFilter(status='') {
-    this.selectedStatus = this.statusList.filter(item => (item.value === status))[0];
-    this.title = this.selectedStatus.name;
-    this.getList(status);
-    this.selectedItem = null;
-    this.item = null;
+        this.selectedStatus = this.statusList.filter(item => (item.value == status))[0];
+        this.title = this.selectedStatus.name;
+
+        return this.service.getList(status)
+      })
+      .subscribe(data => this.list = data);
   }
 
   getList(status) {
     this.service.getList(status).then(data => this.list = data);
   }
-
-  newItem() {
-    this.selectedItem = null;
-    this.list = null;
-    this.item = new Ticket();
-  }
-
-  selectItem(item) {
-    this.list = null;
-    this.item = null;
-    this.selectedItem = item;
-  } 
 }

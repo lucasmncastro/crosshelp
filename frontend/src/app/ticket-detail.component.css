@@ -1,15 +1,18 @@
 .ticket h1 small {
-  color: #999;
+  color: #ccc;
   font-size: 0.8em;
 }
 .ticket .summary {
- font-size: 1em;
+  font-size: 1em;
 }
 .ticket .badge {
- font-size: 1em;
+  font-size: 1em;
 }
 .ticket .text {
-  border: 1px solid #ddd;
-  padding: 10px;
+  border: 1px solid #eee;
+  padding: 20px;
   margin-top: 20px;
+}
+.ticket h1 .form-control {
+  font-size: 1em;
 }

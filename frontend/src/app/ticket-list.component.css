@@ -1,4 +1,3 @@
 table.tickets tr:hover {
-  cursor: pointer;
   background: lightyellow;
 }

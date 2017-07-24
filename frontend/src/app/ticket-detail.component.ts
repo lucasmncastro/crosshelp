@@ -1,4 +1,7 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import 'rxjs/add/operator/switchMap';
+
 import { Ticket } from './ticket';
 import { TicketService } from './ticket.service';
 
@@ -8,32 +11,52 @@ import { TicketService } from './ticket.service';
   templateUrl: './ticket-detail.component.html',
   styleUrls: ['./ticket-detail.component.css']
 })
-export class TicketDetailComponent {
+export class TicketDetailComponent implements OnInit {
 
-  @Input() item: Ticket;
+  // List of ticket status used on side menu to filter them.
+  statusList = [
+    {name: "All tickets", value: ''},
+    {name: "Open",        value: 'open' },
+    {name: "Closed",      value: 'closed'}
+  ];
+  selectedStatus: any;
+
+  item: any;
   editMode = false;
 
-  constructor(private service: TicketService) { }
+  constructor(
+    private service: TicketService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) { }
 
   edit() {
     this.editMode = true;
   }
 
   save() {
-    this.service.
-      save(this.item).
-      then(
+    this.service
+      .save(this.item)
+      .then(
         data => this.editMode = false,
         err  => this.editMode = true
       );
   }
 
+  ngOnInit(): void {
+    this.item = new Ticket();
+
+    this.route.paramMap
+      .switchMap((params: ParamMap) => {
+        var id = +params.get('id');
+        return this.service.getItem(id)
+      })
+      .subscribe(data => this.item = data);
+  }
+
   delete() {
-    this.service.
-      delete(this.item).
-      then(
-        data => console.info("Deleted!"),
-        err  => console.info("Error, maybe it already was deleted!")
-      );
+    this.service
+      .delete(this.item)
+      .then(data => this.router.navigate(['/tickets/', this.item.status]));
   }
 }

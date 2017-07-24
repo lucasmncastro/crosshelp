@@ -5,12 +5,12 @@
         <input class="form-control" placeholder="Search..."/>
       </li>
       <li class="nav-item" *ngFor="let s of statusList">
-        <a class="nav-link" [class.active]="selectedStatus.value === s.value" href="#" (click)="selectStatusFilter(s.value)">
+        <a class="nav-link" [class.active]="selectedStatus.value === s.value" [routerLink]="['/tickets/' + s.value]">
           {{ s.name }}
         </a>
       </li>
       <li class="nav-item p-2">
-        <a href="#" (click)="newItem()" class="btn btn-primary btn-block">New Ticket</a>
+        <a [routerLink]="['/tickets/new']" class="btn btn-primary btn-block">New Ticket</a>
       </li>
     </ul>
   </nav>
@@ -31,9 +31,9 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let ticket of list" (click)="selectItem(ticket)">
+            <tr *ngFor="let ticket of list">
               <td>{{ ticket.id }} </td>
-              <td>{{ ticket.title }}</td>
+              <td><a [routerLink]="['/ticket', ticket.id]">{{ ticket.title }}</a></td>
               <td>{{ ticket.customer }}</td>
               <td>{{ ticket.author }}</td>
               <td>{{ ticket.opened_at | amTimeAgo }}</td>
@@ -42,8 +42,5 @@
         </table>
       </div>
     </div>
-
-    <ticket-detail [item]="selectedItem"></ticket-detail>
-    <ticket-form [item]="item"></ticket-form>
   </main>
 </div>

@@ -6,17 +6,19 @@ import { Ticket } from './ticket';
 @Injectable()
 export class TicketService {
 
-  private list;
-
   constructor(private http: HttpClient) {}
 
   getList(status) {
-    return new Promise(resolve => { 
-      this.http.get(`http://localhost:3000/tickets?with_status=${status}`).
-        subscribe(data => {
-          this.list = data;
-          resolve(this.list);
-        });
+    return new Promise((resolve, reject) => { 
+      this.http.get(`http://localhost:3000/tickets?with_status=${status}`)
+        .subscribe(data => resolve(data), err => reject(err));
+    })
+  }
+
+  getItem(id) {
+    return new Promise((resolve, reject) => { 
+      this.http.get(`http://localhost:3000/tickets/${id}`)
+        .subscribe(data => resolve(data), err => reject(err));
     })
   }
 

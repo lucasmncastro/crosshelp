@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Ticket } from './ticket';
 import { TicketService } from './ticket.service';
 
@@ -7,12 +7,26 @@ import { TicketService } from './ticket.service';
   selector: 'ticket-form', 
   templateUrl: './ticket-form.component.html',
 })
-export class TicketFormComponent {
+export class TicketFormComponent implements OnInit {
 
-  @Input() item: Ticket;
+  // List of ticket status used on side menu to filter them.
+  // TODO Move to other place can be accessed globally.
+  statusList = [
+    {name: "All tickets", value: ''},
+    {name: "Open",        value: 'open' },
+    {name: "Closed",      value: 'closed'}
+  ];
+  selectedStatus: any;
+
+  item: Ticket;
   message: any;
 
   constructor(private service: TicketService) { }
+
+  ngOnInit(): void {
+    this.selectedStatus = null;
+    this.item = new Ticket();
+  }
   
   save() {
     this.service.
