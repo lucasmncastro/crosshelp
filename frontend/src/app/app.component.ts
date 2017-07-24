@@ -9,4 +9,8 @@ import { TicketListComponent } from './ticket-list.component';
 })
 export class AppComponent {
   title = 'CrossHelp';
+
+  userSignedIn() {
+    return window.localStorage['authToken'] != '';
+  }
 }

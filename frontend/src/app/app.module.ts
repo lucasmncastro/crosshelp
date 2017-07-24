@@ -13,6 +13,7 @@ import { TicketListComponent } from './ticket-list.component';
 import { TicketDetailComponent } from './ticket-detail.component';
 import { TicketFormComponent } from './ticket-form.component';
 import { HelpComponent } from './help.component';
+import { LoginComponent } from './login/login.component';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { HelpComponent } from './help.component';
     TicketListComponent,
     TicketDetailComponent,
     TicketFormComponent,
-    HelpComponent
+    HelpComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -35,7 +37,8 @@ import { HelpComponent } from './help.component';
       { path: 'tickets',         component: TicketListComponent },
       { path: 'tickets/:status', component: TicketListComponent },
       { path: 'ticket/:id',      component: TicketDetailComponent },
-      { path: 'help',            component: HelpComponent }
+      { path: 'help',            component: HelpComponent },
+      { path: 'login',           component: LoginComponent }
     ])
   ],
   providers: [
