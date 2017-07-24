@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+alex:
+  name: Alex
+  email: alex@email.com
+  encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>
+  customer:
+  role: admin
+
+andrey:
+  name: Andrey Migin
+  email: andrey@email.com
+  encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>
+  customer: likke
+  role: admin

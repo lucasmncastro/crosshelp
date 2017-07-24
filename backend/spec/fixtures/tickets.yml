@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: Fix my website
+  message: Please, I can't access it!
+  status: open
+  user: andrey
+
+two:
+  title: Create a new email account
+  message: I need you to create a email called andrey@email.com
+  status: closed
+  user: andrey
