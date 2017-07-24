@@ -17,29 +17,28 @@ export class TicketService {
 
   getItem(id) {
     return new Promise((resolve, reject) => { 
-      this.http.get(`http://localhost:3000/tickets/${id}`)
+      this.http.get(`http://localhost:3000/tickets/${id}`, this.options())
         .subscribe(data => resolve(data), err => reject(err));
     })
   }
 
   create(ticket) {
     return new Promise((resolve, reject) => {
-      this.http.post('http://localhost:3000/tickets', {'ticket': ticket})
+      this.http.post('http://localhost:3000/tickets', {'ticket': ticket}, this.options())
         .subscribe(data => resolve(data), err => reject(err));
     });
   }
 
   save(ticket) {
     return new Promise((resolve, reject) => {
-      this.http.put(`http://localhost:3000/tickets/${ticket.id}`, {'ticket': ticket})
+      this.http.put(`http://localhost:3000/tickets/${ticket.id}`, {'ticket': ticket}, this.options())
         .subscribe(data => resolve(data), err => reject(err));
     });
   }
 
-
   delete(ticket) {
     return new Promise((resolve, reject) => {
-      this.http.delete(`http://localhost:3000/tickets/${ticket.id}`)
+      this.http.delete(`http://localhost:3000/tickets/${ticket.id}`, this.options())
         .subscribe(data => resolve(data), err => reject(err));
     });
   }
