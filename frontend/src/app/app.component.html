@@ -9,8 +9,11 @@
       <li class="nav-item">
         <a [routerLink]="['/']" class="nav-link">Tickets</a>
       </li>
-      <li class="nav-item">
+      <li *ngIf="canReports()"class="nav-item">
         <a [routerLink]="['/reports']" class="nav-link">Reports</a>
+      </li>
+      <li *ngIf="canSettings()"class="nav-item">
+        <a [routerLink]="['/settings']" class="nav-link">Settings</a>
       </li>
       <li class="nav-item">
         <a [routerLink]="['/help']" class="nav-link">Help</a>
@@ -20,7 +23,7 @@
       <li class="nav-item">
         <a class="nav-link" href="#">
           <i class="fa fa-user"></i>
-          Welcome, {{ getUsername() }}
+          {{ getUsername() }} (<span>{{ getRole() }}</span>)
         </a>
       </li>
       <li class="nav-item">

@@ -6,9 +6,11 @@ class Api::V1::SessionsController < ApplicationController
 
     if user and user.valid_password?(params[:password])
       hash = {
-        token:  user.create_auth_token!,
-        email:  user.email,
-        name:   user.name
+        token:       user.create_auth_token!,
+        email:        user.email,
+        name:         user.name,
+        role:         user.role,
+        customerName: user.customer.try(:name)
       }
       render json: hash, status: :ok
     else

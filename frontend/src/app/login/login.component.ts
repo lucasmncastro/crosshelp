@@ -29,6 +29,7 @@ export class LoginComponent implements OnInit {
         window.localStorage['authToken'] = data['token'];
         window.localStorage['email'] = data['email'];
         window.localStorage['name'] = data['name'];
+        window.localStorage['role'] = data['role'];
         this.router.navigate(['/']);
       },
       err => {
