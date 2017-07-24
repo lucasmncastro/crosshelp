@@ -18,6 +18,7 @@ class Comment < ApplicationRecord
       id: id,
       message: message,
       action: action,
+      user: user,
       author: user.name,
       created_at: created_at
     }

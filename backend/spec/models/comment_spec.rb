@@ -61,4 +61,22 @@ RSpec.describe Comment, type: :model do
     end
   end
 
+  context "#as_json" do
+    before do
+      @comment = comments(:one)
+      @json    = @comment.as_json
+    end
+
+    it "should get the attributes" do
+      expect(@json[:id]).to eq @comment.id
+      expect(@json[:message]).to eq @comment.message
+      expect(@json[:action]).to eq @comment.action
+      expect(@json[:created_at]).to eq @comment.created_at
+    end
+
+    it "should get the user who created this ticket" do
+      expect(@json[:user]).to eq @comment.user
+    end
+  end
+
 end
