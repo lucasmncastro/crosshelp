@@ -29,13 +29,26 @@
       </h1>
 
       <div class="summary">
-        <span class="badge badge-{{ item.status == 'closed' ? 'danger' : 'success' }}">
-          {{ item.status | titlecase }}
-        </span>
-        {{ item.author }} from {{ item.customer }} 
-        opened this
-        {{ item.opened_at | amTimeAgo }} 
-        - {{ item.comments.length }} comments
+        <div *ngIf="item.status == 'open'">
+          <span class="badge badge-success">
+            {{ item.status | titlecase }}
+          </span>
+
+          {{ item.author }} from {{ item.customer }} 
+          opened this
+          {{ item.opened_at | amTimeAgo }} 
+          - {{ item.comments.length }} comments
+        </div>
+        <div *ngIf="item.status == 'closed'">
+          <span class="badge badge-danger">
+            {{ item.status | titlecase }}
+          </span>
+
+          {{ item.author }} from {{ item.customer }} 
+          opened this
+          {{ item.opened_at | amTimeAgo }} 
+          - {{ item.comments.length }} comments
+        </div>
       </div>
 
       <div *ngIf="!editMode" class="text">
@@ -67,6 +80,9 @@
         <div class="message">{{ comment.message }} </div>
         <div class="info">
           <span class="author">{{ comment.author }} </span>
+          <span class="action" *ngIf="comment.action == 'none'">commented</span>
+          <span class="action" *ngIf="comment.action == 'close'">closed</span>
+          <span class="action" *ngIf="comment.action == 'reopen'">reopened</span>
           <span class="created-at">{{ comment.created_at | amTimeAgo }}</span>
         </div>
       </div>
@@ -78,7 +94,8 @@
           </div>
           <div class="card-footer p-1">
             <button (click)="saveComment()" class="btn btn-primary">Comment</button>
-            <button (click)="saveComment('close')" class="btn btn-secondary">Close Ticket</button>
+            <button *ngIf="item.status == 'open'" (click)="saveComment('close')" class="btn btn-secondary">Close ticket</button>
+            <button *ngIf="item.status == 'closed'" (click)="saveComment('reopen')" class="btn btn-secondary">Reopen</button>
           </div>
         </div>
       </form>

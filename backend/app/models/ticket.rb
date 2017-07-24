@@ -1,11 +1,12 @@
 class Ticket < ApplicationRecord
+  extend Enumerize
+  
+  enumerize :status, in: %w(open closed), default: :open
+
   belongs_to :user
+  has_many :comments, dependent: :delete_all
 
   scope :with_status, -> (status) { where(status: status) }
-
-  before_create :set_status_open
-
-  has_many :comments, dependent: :delete_all
 
   def as_json(options={})
     {
@@ -18,9 +19,5 @@ class Ticket < ApplicationRecord
       author: user.name,
       comments: comments
     }
-  end
-
-  def set_status_open
-    self.status = "open"
   end
 end
