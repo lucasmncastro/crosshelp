@@ -22,11 +22,6 @@
     <ngb-alert *ngIf="message" [dismissible]="false" [type]="message.type">{{ message.message }}</ngb-alert>
 
     <form>
-      <div class="form-group" *ngIf="user">
-        <label for="name">User ID</label>
-        <input [(ngModel)]="item.user_id" name="id" placeholder="User id" class="form-control"/>
-      </div>
-
       <div class="form-group">
         <label for="name">Title</label>
         <input [(ngModel)]="item.title" name="title" placeholder="Describe your issue" class="form-control"/>
