@@ -29,8 +29,8 @@ RSpec.describe Ticket, type: :model do
   end
 
   it ".with_status(:open) should get all open tickets" do
-    closed = Ticket.with_status(:open)
-    expect(closed).to eq [tickets(:one)]
+    open = Ticket.with_status(:open).to_a
+    expect(open).to eq [tickets(:three), tickets(:one)]
   end
 
   it ".with_status(:closed) should get all closed tickets" do

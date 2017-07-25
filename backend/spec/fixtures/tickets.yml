@@ -11,3 +11,9 @@ two:
   message: I need you to create a email called andrey@email.com
   status: closed
   user: andrey
+
+three:
+  title: Training new worker
+  message: I would like to schedule a training
+  status: open
+  user: bryan 

@@ -7,9 +7,23 @@ alex:
   customer:
   role: admin
 
+karla:
+  name: Karla
+  email: karla@email.com
+  encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>
+  customer:
+  role: agent
+
 andrey:
   name: Andrey Migin
   email: andrey@email.com
   encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>
   customer: likke
-  role: admin
+  role: customer
+
+bryan:
+  name: Bryan Karp
+  email: bryan@email.com
+  encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>
+  customer: mobi
+  role: customer
