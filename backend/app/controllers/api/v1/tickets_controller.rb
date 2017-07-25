@@ -22,6 +22,7 @@ class Api::V1::TicketsController < ApplicationController
   # POST /tickets
   def create
     @ticket = Ticket.new(ticket_params)
+    @ticket.user = @current_user
 
     if @ticket.save
       render json: @ticket, status: :created, location: ['api', 'v1', @ticket]
