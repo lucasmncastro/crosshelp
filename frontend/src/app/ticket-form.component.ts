@@ -1,4 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+
 import { Ticket } from './ticket';
 import { TicketService } from './ticket.service';
 
@@ -18,10 +20,13 @@ export class TicketFormComponent implements OnInit {
   ];
   selectedStatus: any;
 
-  item: Ticket;
+  item: any;
   message: any;
 
-  constructor(private service: TicketService) { }
+  constructor(
+    private service: TicketService,
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
     this.selectedStatus = null;
@@ -29,17 +34,15 @@ export class TicketFormComponent implements OnInit {
   }
   
   save() {
-    this.service.
-      create(this.item).
-      then(
-        data => {
-          this.message = {type: 'success', message: 'Ticket successfully saved!' }
-          this.item = new Ticket();
+    this.service
+      .create(this.item)
+      .then(
+        (data) => { 
+          this.item = data;
+          this.router.navigate(['/ticket/', this.item.id])
         },
-        err => {
-          this.message = {type: 'danger', message: 'Ops, something goes wrong!' }
-        }
-    );
+        (err) => this.message = {type: 'danger', message: 'Ops, something goes wrong!' }
+      );
   }
 
 }
