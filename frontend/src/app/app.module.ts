@@ -16,7 +16,6 @@ import { HelpComponent } from './help.component';
 import { LoginComponent } from './login/login.component';
 import { AuthService } from './auth.service';
 import { ReportsComponent } from './reports/reports.component';
-import { SettingsComponent } from './settings/settings.component';
 
 
 @NgModule({
@@ -28,7 +27,6 @@ import { SettingsComponent } from './settings/settings.component';
     HelpComponent,
     LoginComponent,
     ReportsComponent,
-    SettingsComponent,
   ],
   imports: [
     BrowserModule,
@@ -45,7 +43,6 @@ import { SettingsComponent } from './settings/settings.component';
       { path: 'help',            component: HelpComponent },
       { path: 'login',           component: LoginComponent },
       { path: 'reports',         component: ReportsComponent },
-      { path: 'settings',        component: SettingsComponent }
     ])
   ],
   providers: [

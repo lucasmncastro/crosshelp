@@ -37,7 +37,6 @@ export class LoginComponent implements OnInit {
         this.message = "Email or password invalid"
       }
     );
-
   }
 
 }
