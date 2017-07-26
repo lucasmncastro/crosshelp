@@ -11,7 +11,16 @@ export class TicketService {
 
   getList(status) {
     return new Promise((resolve, reject) => { 
-      this.http.get(`${URL_BASE}?with_status=${status}`, this.options())
+      let url = `${URL_BASE}?with_status=${status}`
+      this.http.get(url, this.options())
+        .subscribe(data => resolve(data), err => reject(err));
+    })
+  }
+
+  getReportList(status, userId, year, month) {
+    return new Promise((resolve, reject) => { 
+      let url = `${URL_BASE}?with_status=${status}&with_year=${year}&with_month=${month}&with_user_id=${userId}`;
+      this.http.get(url, this.options())
         .subscribe(data => resolve(data), err => reject(err));
     })
   }

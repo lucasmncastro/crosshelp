@@ -16,6 +16,7 @@ import { HelpComponent } from './help/help.component';
 import { LoginComponent } from './login/login.component';
 import { LoginService } from './login/login.service';
 import { ReportsComponent } from './reports/reports.component';
+import { UserService } from './shared/user.service';
 
 
 @NgModule({
@@ -47,7 +48,8 @@ import { ReportsComponent } from './reports/reports.component';
   ],
   providers: [
     TicketService,
-    LoginService
+    LoginService,
+    UserService
   ],
   bootstrap: [AppComponent]
 })

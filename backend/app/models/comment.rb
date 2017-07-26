@@ -27,8 +27,8 @@ class Comment < ApplicationRecord
   private
   def update_ticket
     case action
-    when 'close' then  ticket.update!(status: 'closed')
-    when 'reopen' then ticket.update!(status: 'open')
+    when 'close' then  ticket.close!
+    when 'reopen' then ticket.reopen!
     end
   end
 end

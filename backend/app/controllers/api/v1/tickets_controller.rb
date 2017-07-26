@@ -2,6 +2,9 @@ class Api::V1::TicketsController < ApplicationController
   before_action :set_ticket, only: [:show, :update, :destroy]
 
   has_scope :with_status
+  has_scope :with_user_id
+  has_scope :with_month
+  has_scope :with_year
 
   # GET /tickets
   def index
