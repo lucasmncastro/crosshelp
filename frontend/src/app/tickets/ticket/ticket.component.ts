@@ -2,16 +2,16 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import 'rxjs/add/operator/switchMap';
 
-import { Ticket } from './ticket';
-import { TicketService } from './ticket.service';
+import { Ticket } from '../shared/ticket';
+import { TicketService } from '../shared/ticket.service';
 
 
 @Component({
-  selector: 'ticket-detail', 
-  templateUrl: './ticket-detail.component.html',
-  styleUrls: ['./ticket-detail.component.css']
+  selector: 'ticket', 
+  templateUrl: './ticket.component.html',
+  styleUrls: ['./ticket.component.css']
 })
-export class TicketDetailComponent implements OnInit {
+export class TicketComponent implements OnInit {
 
   // List of ticket status used on side menu to filter them.
   statusList = [

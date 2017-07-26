@@ -8,13 +8,13 @@ import { RouterModule }   from '@angular/router';
 
 import { AppComponent } from './app.component';
 
-import { TicketService } from './ticket.service';
-import { TicketListComponent } from './ticket-list.component';
-import { TicketDetailComponent } from './ticket-detail.component';
-import { TicketFormComponent } from './ticket-form.component';
-import { HelpComponent } from './help.component';
+import { TicketService } from './tickets/shared/ticket.service';
+import { TicketListComponent } from './tickets/ticket-list/ticket-list.component';
+import { TicketComponent } from './tickets/ticket/ticket.component';
+import { TicketFormComponent } from './tickets/ticket-form/ticket-form.component';
+import { HelpComponent } from './help/help.component';
 import { LoginComponent } from './login/login.component';
-import { AuthService } from './auth.service';
+import { LoginService } from './login/login.service';
 import { ReportsComponent } from './reports/reports.component';
 
 
@@ -22,7 +22,7 @@ import { ReportsComponent } from './reports/reports.component';
   declarations: [
     AppComponent,
     TicketListComponent,
-    TicketDetailComponent,
+    TicketComponent,
     TicketFormComponent,
     HelpComponent,
     LoginComponent,
@@ -36,10 +36,10 @@ import { ReportsComponent } from './reports/reports.component';
     FormsModule,
     RouterModule.forRoot([
       { path: '',                redirectTo: '/tickets', pathMatch: 'full' },
-      { path: 'tickets/new',     component: TicketFormComponent },
       { path: 'tickets',         component: TicketListComponent },
+      { path: 'tickets/new',     component: TicketFormComponent },
       { path: 'tickets/:status', component: TicketListComponent },
-      { path: 'ticket/:id',      component: TicketDetailComponent },
+      { path: 'ticket/:id',      component: TicketComponent },
       { path: 'help',            component: HelpComponent },
       { path: 'login',           component: LoginComponent },
       { path: 'reports',         component: ReportsComponent },
@@ -47,7 +47,7 @@ import { ReportsComponent } from './reports/reports.component';
   ],
   providers: [
     TicketService,
-    AuthService
+    LoginService
   ],
   bootstrap: [AppComponent]
 })

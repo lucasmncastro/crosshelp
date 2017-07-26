@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { Ticket } from './ticket';
 
+import { Ticket } from './ticket';
 
 const URL_BASE: string = 'http://localhost:3000/api/v1/tickets';
 

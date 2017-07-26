@@ -5,13 +5,13 @@ import { FormsModule }    from '@angular/forms';
 import { Router }         from '@angular/router';
 
 import { LoginComponent } from './login.component';
-import { AuthService }    from '../auth.service';
+import { LoginService }    from './login.service';
 
 class RouterStub {
   navigateByUrl(url: string) { return url; }
 }
 
-class AuthServiceStub {
+class LoginServiceStub {
 }
 
 describe('LoginComponent', () => {
@@ -26,7 +26,7 @@ describe('LoginComponent', () => {
       declarations: [ LoginComponent ],
       providers: [
         { provide: Router, useClass: RouterStub },
-        { provide: AuthService, useClass: AuthServiceStub }
+        { provide: LoginService, useClass: LoginServiceStub }
       ]
     })
     .compileComponents();

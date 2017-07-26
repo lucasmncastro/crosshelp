@@ -1,8 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { Ticket } from './ticket';
-import { TicketService } from './ticket.service';
+import { Ticket } from '../shared/ticket';
+import { TicketService } from '../shared/ticket.service';
 
 
 @Component({
@@ -12,7 +12,7 @@ import { TicketService } from './ticket.service';
 export class TicketFormComponent implements OnInit {
 
   // List of ticket status used on side menu to filter them.
-  // TODO Move to other place can be accessed globally.
+  // TODO Move to a shared place.
   statusList = [
     {name: "All tickets", value: ''},
     {name: "Open",        value: 'open' },
@@ -34,12 +34,13 @@ export class TicketFormComponent implements OnInit {
   }
   
   save() {
+    let current = this;
     this.service
       .create(this.item)
       .then(
         (data) => { 
-          this.item = data;
-          this.router.navigate(['/ticket/', this.item.id])
+          current.item = data;
+          this.router.navigate(['/ticket/', current.item.id])
         },
         (err) => this.message = {type: 'danger', message: 'Ops, something goes wrong!' }
       );
