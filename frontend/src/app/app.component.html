@@ -12,10 +12,10 @@
       <li *ngIf="canReports()"class="nav-item">
         <a [routerLink]="['/reports']" class="nav-link">Reports</a>
       </li>
-      <li *ngIf="canSettings()"class="nav-item">
+      <li *ngIf="canSettings()"class="nav-item hidden-xs-up">
         <a [routerLink]="['/settings']" class="nav-link">Settings</a>
       </li>
-      <li class="nav-item">
+      <li class="nav-item hidden-xs-up">
         <a [routerLink]="['/help']" class="nav-link">Help</a>
       </li>
     </ul>
