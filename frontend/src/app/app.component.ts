@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 
@@ -6,17 +6,15 @@ import { Router } from '@angular/router';
   selector: 'app-root',
   templateUrl: './app.component.html'
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'CrossHelp';
 
-  constructor(router: Router) {
-    if (! this.userSignedIn()) {
-      router.navigate(['/login']);
-    }
+  constructor(private router: Router) {
   }
 
   userSignedIn() {
-    return window.localStorage['authToken'] != '';
+    let token = window.localStorage['authToken'] 
+    return token && token != '';
   }
 
   getUsername() {
@@ -25,6 +23,12 @@ export class AppComponent {
 
   getRole() {
     return window.localStorage['role'];
+  }
+
+  ngOnInit() {
+    if (! this.userSignedIn()) {
+      this.router.navigate(['/login']);
+    }
   }
 
   canReports() {
