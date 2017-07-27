@@ -37,15 +37,16 @@
       <li class="nav-item">
         <button type="submit" class="btn btn-success" (click)="updateReport()">Update Report</button>
       </li>
+      <li class="nav-item">
+        <button type="button" class="mt-3 btn btn-secondary" onclick="print()">Print or Save as PDF</button>
+      </li>
     </ul>
   </nav>
 
   <main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
-    <div class="report">
-      <h1>
-        Report: Closed tickets
-      </h1>
-    </div>
+    <h1>
+      Report: Closed tickets
+    </h1>
 
     <div *ngIf="ticketList.length == 0">
       No record found.
